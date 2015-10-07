@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using KSP.IO;
 
 namespace CameraFocusChanger
 {
@@ -21,6 +22,10 @@ namespace CameraFocusChanger
             pivotTranslateSharpness = 0.5f;
             hasReachedTarget = false;
             isFocusing = false;
+
+            PluginConfiguration config = PluginConfiguration.CreateForType<CameraFocusChanger>();
+            config.load();
+            actionKey = config.GetValue<KeyCode>("actionKey");
         }
 
         void Update()
@@ -76,7 +81,6 @@ namespace CameraFocusChanger
                 Vessel vessel = FlightGlobals.ActiveVessel;
                 Vector3d currentPosition = vessel.GetWorldPos3D();
 
-
                 //if (distance >= 0.015f)
                     //print(string.Format("Distance of {0}", distance));
 
@@ -89,10 +93,10 @@ namespace CameraFocusChanger
                 {
                     //print(string.Format("Moving by {0}", (positionDifference.normalized * Time.fixedDeltaTime * (distance * Math.Max(4 - distance, 1))).magnitude));
                     flightCamera.transform.parent.position -= positionDifference.normalized * Time.fixedDeltaTime * (distance * Math.Max(4 - distance, 1));
-                    // if the parts are not of the same craft, remove the change in world position
+                    // if the parts are not of the same craft, boost the speed at which we move towards it
                     Part part = Part.FromGO(targetTransform.gameObject);
                     if (part != null && part.vessel != vessel)
-                        flightCamera.transform.parent.position -= currentPosition - previousPosition;
+                        flightCamera.transform.parent.position -= positionDifference.normalized * Time.fixedDeltaTime;
                 }
 
                 previousPosition = currentPosition;
