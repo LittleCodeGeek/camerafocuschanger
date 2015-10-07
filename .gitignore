@@ -195,3 +195,4 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 GameData/CameraFocusChanger/CameraFocusChanger.dll
+CameraFocusChanger.zip
