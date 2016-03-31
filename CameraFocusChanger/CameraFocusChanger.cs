@@ -25,7 +25,7 @@ namespace CameraFocusChanger
 
             PluginConfiguration config = PluginConfiguration.CreateForType<CameraFocusChanger>();
             config.load();
-            actionKey = config.GetValue<KeyCode>("actionKey");
+            actionKey = config.GetValue<KeyCode>("actionKey", KeyCode.O);
         }
 
         void Update()
