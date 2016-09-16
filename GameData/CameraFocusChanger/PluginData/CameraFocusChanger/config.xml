@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
     <keycode name="actionKey">O</keycode>
+    <bool name="showUpdateMessage">1</bool>
 </config>
