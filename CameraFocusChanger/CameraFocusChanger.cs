@@ -137,7 +137,7 @@ namespace CameraFocusChanger
         {
             // check if we are trying to change the focus
             GameObject obj = EventSystem.current.currentSelectedGameObject;
-            bool inputFieldIsFocused = InputLockManager.IsLocked(ControlTypes.ALL_SHIP_CONTROLS) || (obj != null && obj.GetComponent<InputField>() != null && obj.GetComponent<InputField>().isFocused);
+            bool inputFieldIsFocused = InputLockManager.IsAllLocked(ControlTypes.KEYBOARDINPUT) || (obj != null && obj.GetComponent<InputField>() != null && obj.GetComponent<InputField>().isFocused);
             if (!inputFieldIsFocused && Input.GetKeyDown(actionKey))
             {
                 DebugPrint("updating camera focus");
